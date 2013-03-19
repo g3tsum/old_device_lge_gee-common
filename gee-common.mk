@@ -143,6 +143,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml
 
+# Baseband properly shown in about info instead of Unknown
+PRODUCT_PROPERTY_OVERRIDES += \
+	gsm.version.baseband=APQ8064/MDM9x15M
+
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.opengles.version=131072
 

@@ -169,7 +169,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-qmi-1.so 
 
 #Upto 3 layers can go through overlays
-PRODUCT_PROPERTY_OVERRIDES += debug.mdpcomp.maxlayer=3
+PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable=true
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 

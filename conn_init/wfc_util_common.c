@@ -21,7 +21,7 @@
 
 #include "wfc_util_log.h"
 
-#define WFC_UTIL_RANDOM_MAC_HEADER "E892A4"
+#define WFC_UTIL_RANDOM_MAC_HEADER "001122"
 
 void wfc_util_htoa(unsigned char *pHexaBuff, int szHexaBuff, char *pAsciiStringBuff, int szAsciiStringBuff)
 {
@@ -110,7 +110,6 @@ int wfc_util_is_random_mac(char *mac_add)
 void wfc_util_random_mac(unsigned char* mac_addr)
 {
 	unsigned long int rand_mac;
-	int i = 0;
 
 	if(NULL == mac_addr) {
 		wfc_util_log_error("wfc_util_random_mac : buffer is NULL");
@@ -122,9 +121,9 @@ void wfc_util_random_mac(unsigned char* mac_addr)
 	rand_mac=random();
 
 	#ifndef WFC_UTIL_RANDOM_MAC_HEADER
-	mac_addr[0] = (unsigned char)0xE8;
-	mac_addr[1] = (unsigned char)0x92;
-	mac_addr[2] = (unsigned char)0xA4;
+	mac_addr[0] = (unsigned char)0x00;
+	mac_addr[1] = (unsigned char)0x11;
+	mac_addr[2] = (unsigned char)0x22;
 	#else  /* WFC_UTIL_RANDOM_MAC_HEADER */
 	wfc_util_atoh(WFC_UTIL_RANDOM_MAC_HEADER, 6, mac_addr, 3);
 	#endif /* WFC_UTIL_RANDOM_MAC_HEADER */
@@ -132,14 +131,5 @@ void wfc_util_random_mac(unsigned char* mac_addr)
 	mac_addr[4] = (unsigned char)(rand_mac >> 8);
 	mac_addr[5] = (unsigned char)(rand_mac >> 16);
 
-	FILE *out;
-	out = fopen("/persist/wifi/.macaddr", "a");
-	if(out != NULL)
-	{
-		for(i = 0;i<7;i++)
-		{
-			fprintf(out, "%X",(unsigned int)mac_addr[i]);
-		}
-	}
 	return;
 }

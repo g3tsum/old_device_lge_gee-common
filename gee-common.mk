@@ -158,6 +158,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.audio.lowlatency.rec=false \
 	af.resampler.quality=4
 
+# Enable for debugging
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.debuggable=1 \
+    persist.service.adb.enable=1
+
 # Do not power down SIM card when modem is sent to Low Power Mode.
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.radio.apm_sim_not_pwdn=1

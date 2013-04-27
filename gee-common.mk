@@ -171,10 +171,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.telephony.call_ring.multiple=0
 
-# QC RIL path for rild
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libril-qc-qmi-1.so 
-
 PRODUCT_CHARACTERISTICS := default
 
 #Upto 3 layers can go through overlays

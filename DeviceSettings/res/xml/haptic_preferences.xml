@@ -11,4 +11,3 @@
                 android:defaultValue="50" />
     </PreferenceCategory>
 </PreferenceScreen>
-

@@ -31,7 +31,7 @@ import android.util.Log;
 
 public class SensorsFragmentActivity extends PreferenceFragment {
 
-    private static final String TAG = "GalaxyS3Parts_General";
+    private static final String TAG = "OptimusGParts_General";
 
     private static final String FILE_TOUCHKEY_TOGGLE = "/sys/class/leds/button-backlight/max_brightness";
     private static final String FILE_BLN_TOGGLE = "/sys/class/misc/backlightnotification/enabled";

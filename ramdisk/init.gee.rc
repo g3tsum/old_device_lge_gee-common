@@ -249,14 +249,15 @@ on post-fs-data
     chmod 0444 /proc/cmdline
 
     # communicate with mpdecision and thermald
-#    mkdir /dev/socket/mpdecision 0770 system system
-#    chmod 2770 /dev/socket/mpdecision
+    mkdir /dev/socket/mpdecision 0770 system system
+    chmod 2770 /dev/socket/mpdecision
 
     # Enable Power modes and set the CPU Freq Sampling rates
     write /sys/module/rpm_resources/enable_low_power/L2_cache 1
     write /sys/module/rpm_resources/enable_low_power/pxo 1
     write /sys/module/rpm_resources/enable_low_power/vdd_dig 1
     write /sys/module/rpm_resources/enable_low_power/vdd_mem 1
+    write /sys/module/pm_8x60/modes/cpu0/retention/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu2/power_collapse/suspend_enabled 1
@@ -281,6 +282,7 @@ on charger
     write /sys/module/rpm_resources/enable_low_power/pxo 1
     write /sys/module/rpm_resources/enable_low_power/vdd_dig 1
     write /sys/module/rpm_resources/enable_low_power/vdd_mem 1
+    write /sys/module/pm_8x60/modes/cpu0/retention/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu2/power_collapse/suspend_enabled 1
@@ -417,11 +419,13 @@ service charger /charger
 service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
     class late_start
 
-# service thermald /system/bin/thermald
-#    class main
+service thermald /system/bin/thermald
+    class main
+    disabled
 
-# service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
-#    class main
+service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
+    class main
+    disabled
 
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start

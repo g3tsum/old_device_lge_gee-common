@@ -25,4 +25,8 @@
 
 LOCAL_PATH := $(call my-dir)
 
+ifneq ($(filter geeb geehrc_intl geehrc4g_spr_us,$(TARGET_DEVICE)),)
+
 include $(call all-makefiles-under,$(LOCAL_PATH))
+
+endif

@@ -173,15 +173,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_CHARACTERISTICS := default
 
-# QC RIL path for rild
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libril-qc-qmi-1.so \
-    rild.libargs=-d /dev/smd0 \
-    ro.ril.transmitpower=true
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=/system/lib/libqc-opt.so
-
 #Upto 3 layers can go through overlays
 PRODUCT_PROPERTY_OVERRIDES += debug.mdpcomp.maxlayer=3
 
@@ -270,7 +261,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.qc.sensors.wl_dis=true
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mtp,adb
+	persist.sys.usb.config=mtp
 
 # for bugmailer
 PRODUCT_PACKAGES += send_bug

@@ -271,10 +271,10 @@ on post-fs-data
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 15000
     write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 10
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 162000
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 162000
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 162000
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 162000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 124000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 124000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 124000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 124000
 
 on charger
     # Enable Power modes and set the CPU Freq Sampling rates
@@ -296,10 +296,10 @@ on charger
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
     write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 162000
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 162000
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 162000
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 162000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 124000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 124000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 124000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 124000
 
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd

@@ -44,7 +44,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/init.gee.rc:root/init.gee.rc \
     $(LOCAL_PATH)/ramdisk/init.gee.usb.rc:root/init.gee.usb.rc \
     $(LOCAL_PATH)/ramdisk/init.gee.usb.sh:root/init.gee.usb.sh \
-    $(LOCAL_PATH)/ramdisk/init.qcom.sh:root/init.qcom.sh
+    $(LOCAL_PATH)/ramdisk/init.qcom.sh:root/init.qcom.sh \
+    $(LOCAL_PATH)/ramdisk/fstab.gee:root/fstab.gee
 
 # WiFi
 PRODUCT_COPY_FILES += \

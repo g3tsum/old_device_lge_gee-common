@@ -61,7 +61,7 @@ PRODUCT_COPY_FILES += \
 
 # Audio Policy Config
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf
 
 # Thermal Daemon
 PRODUCT_COPY_FILES += \

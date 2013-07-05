@@ -173,6 +173,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0
 
+# override voice tx device when on headphones with no mic(needed for JB radio)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.ril.tx_headphone_override=Handset
+
 PRODUCT_CHARACTERISTICS := default
 
 #Upto 3 layers can go through overlays

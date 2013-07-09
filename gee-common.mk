@@ -174,6 +174,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0
 
+# Our Modem responds slowly
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.slowModem=1
+
 # override voice tx device when on headphones with no mic(needed for JB radio)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.tx_headphone_override=Handset

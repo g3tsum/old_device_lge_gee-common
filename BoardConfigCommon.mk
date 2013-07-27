@@ -14,17 +14,14 @@
 # limitations under the License.
 #
 
-TARGET_EXTRA_CFLAGS := -mtune=cortex-a9 -mcpu=cortex-a9 -fno-inline-functions -fno-ipa-cp-clone -fno-unswitch-loops -fno-tree-vectorize
+TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
-ARCH_ARM_HAVE_TLS_REGISTER := true
-TARGET_GCC_VERSION := 4.7
-TARGET_USE_O3 := true
-#TARGET_USE_GRAPHITE := true
-TARGET_USE_LINARO_STRING_ROUTINES := true
+TARGET_CPU_VARIANT := krait
 
 # Krait optimizations
 TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
@@ -48,6 +45,7 @@ TARGET_NO_BOOTLOADER := true
 BOARD_VENDOR := lge
 
 BOARD_USES_ALSA_AUDIO:= true
+BOARD_USES_LEGACY_ALSA_AUDIO:= false
 BOARD_USES_FLUENCE_INCALL := true
 BOARD_USES_SEPERATED_AUDIO_INPUT := true
 
@@ -86,6 +84,8 @@ BOARD_EGL_CFG := device/lge/gee-common/configs/egl.cfg
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_UI_LIB := librecovery_ui_gee
 
+TARGET_RECOVERY_FSTAB = device/lge/gee-common/ramdisk/fstab.gee
+RECOVERY_FSTAB_VERSION = 2
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 23068672 # 22M
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 23068672 # 22M
@@ -93,8 +93,6 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 880803840 # 840M
 
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 6189744128 # 5.9G
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
-
-TARGET_RECOVERY_FSTAB := device/lge/gee-common/recovery/recovery.fstab
 
 BOARD_USES_SECURE_SERVICES := true
 
@@ -107,11 +105,36 @@ TARGET_NO_RPC := true
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/lge/gee-common
 
-#Include our own header for camera hal
-TARGET_SPECIFIC_HEADER_PATH := device/lge/gee-common/include
+BOARD_SEPOLICY_DIRS := \
+       device/lge/gee-common/sepolicy
+
+BOARD_SEPOLICY_UNION := \
+       app.te \
+       bluetooth.te \
+       device.te \
+       domain.te \
+       drmserver.te \
+       file.te \
+       file_contexts \
+       hci_init.te \
+       init_shell.te \
+       keystore.te \
+       mediaserver.te \
+       kickstart.te \
+       nfc.te \
+       rild.te \
+       surfaceflinger.te \
+       system.te \
+       ueventd.te \
+       wpa.te
+
 
 BOARD_CHARGER_ENABLE_SUSPEND := true
-TARGET_QCOM_DISPLAY_VARIANT := caf
+
+USE_DEVICE_SPECIFIC_CAMERA := true
+
+BOARD_CHARGER_ENABLE_SUSPEND := true
+# TARGET_QCOM_DISPLAY_VARIANT := caf
 
 BOARD_HAVE_LOW_LATENCY_AUDIO := true
 BOARD_HAS_NO_SELECT_BUTTON := true

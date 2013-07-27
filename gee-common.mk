@@ -62,6 +62,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/mixer_paths.xml:system/etc/mixer_paths.xml
+
 # Thermal Daemon
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermald-gee-common.conf:system/etc/thermald.conf
@@ -115,7 +118,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml
+    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
 
 # NFC packages geehrc for gee-common
 PRODUCT_PACKAGES += \
@@ -148,13 +152,18 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/fetch-swv:system/bin/fetch-swv
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072
+    ro.opengles.version=196608
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320
 
 # Audio Configuration
+# FIXME: Remove persist.audio.handset.mic and persist.audio.fluence.mode
+#        while switching new audio HAL from legacy HAL
 PRODUCT_PROPERTY_OVERRIDES += \
+    persist.audio.handset.mic.type=digital \
+    persist.audio.dualmic.config=endfire \
+    persist.audio.fluence.voicecall=true \
     persist.audio.handset.mic=dmic \
     persist.audio.fluence.mode=endfire \
     persist.audio.lowlatency.rec=false \
@@ -204,7 +213,6 @@ PRODUCT_PACKAGES += \
     copybit.msm8960
 
 PRODUCT_PACKAGES += \
-    alsa.msm8960 \
     audio_policy.msm8064 \
     audio.primary.msm8960 \
     audio.a2dp.default \
@@ -214,6 +222,11 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     OptimusGsettings
+
+# Voice processing
+PRODUCT_PACKAGES += libqcomvoiceprocessing
+PRODUCT_COPY_FILES += \
+    device/lge/gee-common/configs/audio_effects.conf:system/vendor/etc/audio_effects.conf
 
 PRODUCT_PACKAGES += \
     hci_qcomm_init
@@ -249,6 +262,13 @@ PRODUCT_PACKAGES += \
     libwfcu \
     conn_init
 
+PRODUCT_PACKAGES += \
+    keystore.msm8960
+
+PRODUCT_PACKAGES += \
+    wifi/wpa_supplicant_overlay.conf \
+    wifi/p2p_supplicant_overlay.conf
+
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
 
@@ -268,18 +288,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.recordable.rgba8888=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qc.sensors.wl_dis=true
+    ro.qc.sensors.wl_dis=true \
+    ro.qualcomm.sensors.smd=true
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
-# for bugmailer
-PRODUCT_PACKAGES += send_bug
-PRODUCT_COPY_FILES += \
-    system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
-    system/extras/bugmailer/send_bug:system/bin/send_bug
-
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product, hardware/qcom/msm8960/msm8960.mk)
 
 # This is the gee-specific audio package
 $(call inherit-product, frameworks/base/data/sounds/AudioPackage10.mk)

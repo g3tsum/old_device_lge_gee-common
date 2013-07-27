@@ -22,11 +22,26 @@
 # bitrot and build breakages. Building a component unconditionally does
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
+ifneq ($(filter geeb geehrc_intl gee_spr,$(TARGET_DEVICE)),)
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter geeb geehrc_intl gee_spr,$(TARGET_DEVICE)),)
+include $(CLEAR_VARS)
+LOCAL_MODULE       := wifi/wpa_supplicant_overlay.conf
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := $(LOCAL_MODULE)
+LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/wifi
+include $(BUILD_PREBUILT)
 
-include $(call all-makefiles-under,$(LOCAL_PATH))
+include $(CLEAR_VARS)
+LOCAL_MODULE       := wifi/p2p_supplicant_overlay.conf
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := $(LOCAL_MODULE)
+LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/wifi
+include $(BUILD_PREBUILT)
 
 endif
+
+include $(call first-makefiles-under,$(LOCAL_PATH))
